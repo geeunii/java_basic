@@ -11,7 +11,7 @@ public class 연산자_연습문제4 {
         int b = sc.nextInt();
         int c = ++a + b--;
 
-        System.out.printf("a = %d, b = %d, c = %d", a, b, c);
+        System.out.printf("a = %1$d, b = %2$d, c = %3$d", a, b, c);
 
 
     }

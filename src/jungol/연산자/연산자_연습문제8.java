@@ -11,6 +11,6 @@ public class 연산자_연습문제8 {
         int result3 = (a != 0 && b != 0) ? 1 : 0;
         int result4 = a == 0 ? 1 : 0;
 
-        System.out.printf("%d %d %d %d", result1, result2, result3, result4);
+        System.out.printf("%1$d %2$d %3$d %4$d", result1, result2, result3, result4);
     }
 }
