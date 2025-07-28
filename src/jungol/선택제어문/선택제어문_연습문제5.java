@@ -10,9 +10,13 @@ public class 선택제어문_연습문제5 {
         int dice1 = sc.nextInt();
         int dice2 = sc.nextInt();
 
-        if(dice1 >= 4 && dice2 >= 4) System.out.println("이겼습니다.");
-        else if(dice1 >= 4);
-
+        if(4 <= dice1 && 4 <= dice2) {
+            System.out.println("이겼습니다.");
+        } else if (4 <= dice1 || 4 <= dice2) {
+            System.out.println("비겼습니다.");
+        } else {
+            System.out.println("졌습니다.");
+        }
     }
 
 }
