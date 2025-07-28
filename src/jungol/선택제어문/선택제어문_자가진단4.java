@@ -21,6 +21,14 @@ public class 선택제어문_자가진단4 {
 
         if(88.45 < weight) {
             System.out.println("Heavyweight");
+        } else if (weight <= 88.45 && 72.57 < weight) {
+            System.out.println("Cruiserweight");
+        } else if (weight <= 72.57 && 61.23 < weight) {
+            System.out.println("Middleweight");
+        } else if (weight <= 61.23 && 50.80 < weight) {
+            System.out.println("Lightweight");
+        } else {
+            System.out.println("Flyweight");
         }
 
 

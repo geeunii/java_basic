@@ -10,17 +10,21 @@ public class 반복제어문2_형성평가10 {
         int x = sc.nextInt();
         int y = sc.nextInt();
 
-        if((2 <= x && x <= 9) && (2 <= y && y <= 9)) {
-
+        if (x >= y) {
             for(int i = 1; i <= 9; i++) {
-                System.out.printf("%d * %d =  %d\n", x, i, x * i);
-            } for(int j = 1; j <= 9; j++) {
-                System.out.printf("%d * %d =  %d\n", y, j, y * j);
+                for(int j = x; j >= y; j--) {
+                    System.out.printf("%d * %d = %2d   ", j, i, j * i);
+                }
+                System.out.println(); // 줄바꿈
             }
-            System.out.println();
-
+        } else {
+            for(int i = 1; i <= 9; i++) {
+                for(int j = x; j <= y; j++) {
+                    System.out.printf("%d * %d = %2d   ", j, i, j * i);
+                }
+                System.out.println(); // 줄바꿈
+            }
         }
-
 
     }
 
