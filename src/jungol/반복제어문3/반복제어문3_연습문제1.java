@@ -14,7 +14,7 @@ public class 반복제어문3_연습문제1 {
 
         while (number <= n) {
             total += number;
-            if(total > n) break;
+            if (total > n) break;
             ++number;
         }
 
