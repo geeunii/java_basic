@@ -1,8 +1,8 @@
-package jungol.배열;
+package jungol.배열1;
 
 import java.util.Scanner;
 
-public class 배열1_연습문1_1 {
+public class 배열1_연습문제1_1 {
 
     static Scanner sc = new Scanner(System.in);
 
