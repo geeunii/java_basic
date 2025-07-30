@@ -75,10 +75,41 @@ public class PrimitiveEqualType {
         for (int i : arr3) {
 
         }
+
         /// //////////////////
+        System.out.println("============강사님 풀이========");
         // 강사님 풀이
 
+        int vaule = 5;
 
+        for (int i = 0; i < arr3.length; i++) {
+            arr3[i] = vaule;
+            vaule++;
+        }
+
+        for (int i = 0; i < arr3.length; i++) {
+            System.out.println(arr3[i]);
+
+        }
+
+        System.out.println("===== 주소값 복사하여 다른 참조변수에 할당 =====");
+        arr2 = arr3;
+        System.out.println("=======주소값 비교=======");
+        System.out.println(arr2 == arr3);
+
+        System.out.println("============");
+
+        for (int i : arr2) {
+            System.out.println(i);
+        }
+
+        System.out.println("==============");
+
+        for (int i = 0; i < arr2.length; i++) {
+            int i1 = arr2[i];
+            System.out.println(i1);
+        }
 
     }
+
 }
