@@ -20,5 +20,7 @@ public class MovieTest {
         System.out.println(movie1.runningTime);
         System.out.println(movie1.rating + "세");
 
+
+
     }
 }

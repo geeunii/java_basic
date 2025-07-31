@@ -7,6 +7,8 @@ public class Book {
     public String author;
     public int page;
     public String isbn;
+
+    Book(){}
 }
 
 
