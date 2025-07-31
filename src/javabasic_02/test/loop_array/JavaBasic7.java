@@ -15,7 +15,7 @@ public class JavaBasic7 {
                 }
             }
 
-
+            // 하단부
 
             System.out.println();
         }
