@@ -1,4 +1,4 @@
-package jungol.문자열;
+package jungol.문자열1;
 
 import java.util.Scanner;
 

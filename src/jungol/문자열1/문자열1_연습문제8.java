@@ -1,8 +1,6 @@
-package jungol.문자열;
+package jungol.문자열1;
 
 import java.util.Scanner;
-
-import static java.lang.Character.*;
 
 public class 문자열1_연습문제8 {
 
