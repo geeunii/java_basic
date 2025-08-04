@@ -1,4 +1,4 @@
-package javabasic_02.day09_0804.methodbasic;
+package javabasic_02.day09_0804.methodBasic;
 
 import java.util.Scanner;
 
