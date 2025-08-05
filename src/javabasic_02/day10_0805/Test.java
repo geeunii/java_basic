@@ -1,6 +1,4 @@
-package javabasic_02;
-
-import java.util.Arrays;
+package javabasic_02.day10_0805;
 
 public class Test {
     public static void main(String[] args) {
