@@ -11,6 +11,10 @@ public class BankApplication {
     static boolean system = true;
     static int accountCnt = 0;
 
+    public static void main(String[] args) {
+        menu();
+    }
+    
     // 메뉴
     public static void menu() {
 
@@ -131,10 +135,6 @@ public class BankApplication {
     private static void exitApp() {
         System.out.println("프로그램 종료");
         system = false;
-    }
-
-    public static void main(String[] args) {
-        menu();
     }
 
 
