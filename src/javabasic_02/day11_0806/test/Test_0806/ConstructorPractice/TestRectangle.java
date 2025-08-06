@@ -1,4 +1,4 @@
-package javabasic_02.day11_0806.test.ConstructorPractice.TestRectangle;
+package javabasic_02.day11_0806.test.Test_0806.ConstructorPractice;
 
 import java.util.Scanner;
 
