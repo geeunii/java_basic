@@ -9,7 +9,7 @@ public class Teacher {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -17,7 +17,7 @@ public class Teacher {
     }
 
     public int getAge() {
-        return age;
+        return this.age;
     }
 
     public void setAge(int age) {
@@ -25,7 +25,7 @@ public class Teacher {
     }
 
     public String getSubject() {
-        return subject;
+        return this.subject;
     }
 
     public void setSubject(String subject) {
@@ -33,6 +33,7 @@ public class Teacher {
     }
 
     public void print() {
-        System.out.printf("이\t름 : %s\t나 이 : %d\t담당과목 : %s\n", name, age, subject);
+//        System.out.printf("이   름 : %s \t나 이 : %d \t담당과목 : %s\n", name, age, subject);
+        System.out.printf("이   름 : %s \t나 이 : %d \t담당과목 : %s\n", this.name, this.age, this.subject);
     }
 }

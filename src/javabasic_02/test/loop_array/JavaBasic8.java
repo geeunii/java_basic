@@ -22,13 +22,7 @@ public class JavaBasic8 {
                     """);
 
             System.out.print("선택> ");
-            int number = 0; // 사용자 선택 번호
-            try {
-                number = Integer.parseInt(sc.nextLine()); // 문자열을 정수로 변환
-            } catch (NumberFormatException e) {
-                System.out.println("잘못된 입력입니다. 숫자를 입력해주세요.");
-                continue; // 잘못된 입력이면 다시 메뉴로
-            }
+            int number = Integer.parseInt(sc.nextLine()); // 사용자 선택 번호
 
             switch (number) {
                 case 1:

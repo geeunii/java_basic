@@ -9,7 +9,7 @@ public class Employee {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -17,7 +17,7 @@ public class Employee {
     }
 
     public int getAge() {
-        return age;
+        return this.age;
     }
 
     public void setAge(int age) {
@@ -25,7 +25,7 @@ public class Employee {
     }
 
     public String getDept() {
-        return dept;
+        return this.dept;
     }
 
     public void setDept(String dept) {
@@ -33,6 +33,7 @@ public class Employee {
     }
 
     public void print() {
-        System.out.printf("이\t름 : %s\t나 이 : %d\t부\t서 : %s", name, age, dept);
+//        System.out.printf("이   름 : %s \t나 이 : %d \t부  서 : %s", name, age, dept);
+        System.out.printf("이   름 : %s \t나 이 : %d \t부  서 : %s", this.name, this.age, this.dept);
     }
 }

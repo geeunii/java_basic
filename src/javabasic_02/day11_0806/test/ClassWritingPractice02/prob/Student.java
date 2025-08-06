@@ -9,7 +9,7 @@ public class Student {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -17,7 +17,7 @@ public class Student {
     }
 
     public int getAge() {
-        return age;
+        return this.age;
     }
 
     public void setAge(int age) {
@@ -25,7 +25,7 @@ public class Student {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -33,6 +33,7 @@ public class Student {
     }
 
     public void print() {
-        System.out.printf("이\t름 : %s\t나 이 : %d\t학\t번 : %d\n", name, age, id);
+//        System.out.printf("이   름 : %s \t나 이 : %d \t학  번 : %d\n", name, age, id);
+        System.out.printf("이   름 : %s \t나 이 : %d \t학  번 : %d\n", this.name, this.age, this.id);
     }
 }
