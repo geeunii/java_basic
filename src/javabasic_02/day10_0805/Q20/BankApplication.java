@@ -1,4 +1,4 @@
-package javabasic_02.day10_0805_Q20;
+package javabasic_02.day10_0805.Q20;
 
 import javabasic_02.day10_0805.Account;
 

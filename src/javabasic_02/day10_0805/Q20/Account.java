@@ -1,4 +1,4 @@
-package javabasic_02.day10_0805_Q20;
+package javabasic_02.day10_0805.Q20;
 
 public class Account {
     public static final int MIN_BALANCE = 0;        // 상수 최소 0원
