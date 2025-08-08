@@ -6,12 +6,17 @@ public class User {
         RemoteControl televisionControl = new Television();
 
         televisionControl.turnOn();
+
         System.out.println("============ 볼륨 체크 =======");
         televisionControl.setVolume(10);
         televisionControl.setVolume(11);
+
         System.out.println("========== 음소거 확인 ========");
         televisionControl.setMute(true);
         televisionControl.setMute(false);
+
+        System.out.println("======================");
+        RemoteControl.changeBattery();  // 정적 메소드 수행
 
         System.out.println("======================");
         // TV의 최대 볼륨 확인     public static final은 타입.상수명 바로 접근하여 상수값 읽음.

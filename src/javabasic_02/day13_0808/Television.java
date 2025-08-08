@@ -3,6 +3,7 @@ package javabasic_02.day13_0808;
 public class Television implements RemoteControl {
     // 필드 volume 추가
     private int volume;
+
     // 필드 volume 은 볼륨버튼을 통해 음량을 조정할 수 있다.
     @Override
     public void setVolume(int volume) {

@@ -7,7 +7,9 @@ public interface RemoteControl {
     public static final int MIN_VOLUME = 0;
 
     public void turnOn();   // 전원 켜기
+
     public void turnOff();  // 전원 끄기
+
     public void setVolume(int volume);  // 볼륨 조정 기능
 
     public void setMute(boolean mute);
@@ -19,5 +21,20 @@ public interface RemoteControl {
 //        } else {
 //            System.out.println("무음 해제");
 //        }
+//            coolDown();
 //    }
+
+
+    // 정적 메소드
+    static void changeBattery() {
+        System.out.println("리모콘 건전지를 교환합니다.");
+        // 정적 필드는 접근 가능, private static method
+        System.out.println(RemoteControl.MIN_VOLUME);   // 정적 필드 호출 가능
+        // setMute(true);   인스턴스 메소드라 호출 불가
+    }
+
+    private void coolDown() {
+
+    }
+
 }
