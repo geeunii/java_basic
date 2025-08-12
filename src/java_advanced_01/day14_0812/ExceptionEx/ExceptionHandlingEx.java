@@ -1,4 +1,4 @@
-package java_advanced_01.day14_0812.InterfaceEx;
+package java_advanced_01.day14_0812.ExceptionEx;
 
 public class ExceptionHandlingEx {
 
