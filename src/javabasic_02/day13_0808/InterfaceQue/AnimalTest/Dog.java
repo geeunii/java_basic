@@ -1,4 +1,4 @@
-package javabasic_02.day13_0808.InterfaceQue;
+package javabasic_02.day13_0808.InterfaceQue.AnimalTest;
 
 public class Dog extends Animal {
 

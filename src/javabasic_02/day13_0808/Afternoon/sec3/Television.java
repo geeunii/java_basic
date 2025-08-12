@@ -1,4 +1,4 @@
-package javabasic_02.day13_0808;
+package javabasic_02.day13_0808.Afternoon.sec3;
 
 public class Television implements RemoteControl {
     // 필드 volume 추가

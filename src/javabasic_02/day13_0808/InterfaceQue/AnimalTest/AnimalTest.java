@@ -1,4 +1,4 @@
-package javabasic_02.day13_0808.InterfaceQue;
+package javabasic_02.day13_0808.InterfaceQue.AnimalTest;
 
 public class AnimalTest {
 
@@ -7,8 +7,9 @@ public class AnimalTest {
         Animal chicken = new Chicken(3);
         Chicken cheatableChicken = new Chicken(5);  // Animal 타입에서는 fly를 호출할 수 없으므로.
 
-        if (cheatableChicken instanceof Chicken) {
-            cheatableChicken.fly();
+        // `if`문이 실행될 때
+        if (cheatableChicken instanceof Chicken) { // cheatableChicken은 Chicken 타입이므로 true
+            cheatableChicken.fly(); // fly() 호출 -> speed가 2배가 됨
         }
 
 //        if (chicken instanceof Cheatable) {
