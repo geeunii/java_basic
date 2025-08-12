@@ -1,4 +1,4 @@
-package java_advanced_01.day14_0812.interfaceEx;
+package java_advanced_01.day14_0812.InterfaceEx;
 
 import java.util.ArrayList;
 import java.util.List;
