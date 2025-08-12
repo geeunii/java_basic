@@ -5,10 +5,6 @@ public abstract class Factory {
     private int closeHour;
     private String name;
 
-    Factory() {
-
-    }
-
     Factory(String name, int openHour, int closeHour) {
         this.name = name;
         this.openHour = openHour;

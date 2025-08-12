@@ -2,10 +2,6 @@ package javabasic_02.day13_0808.InterfaceQue.FactoryTest;
 
 public class CarFactory extends Factory implements IWorkingTogether {
 
-    CarFactory() {
-
-    }
-
     CarFactory(String name, int openHour, int closeHour) {
         super(name, openHour, closeHour);
     }
