@@ -1,4 +1,4 @@
-package java_advanced_01.day15_0813;
+package java_advanced_01.day15_0813.ResourceEx;
 
 public class ExceptionEx01 {
     public static void main(String[] args) {
