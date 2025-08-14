@@ -1,4 +1,4 @@
-package java_advanced_01.day16_0814;
+package java_advanced_01.day16_0814.linkedlistEx;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
