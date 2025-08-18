@@ -10,7 +10,7 @@ public class Person {	// 고객 클래스 생성
 		this.phone = phone;
 	}
 
-	public Person(String name, int phone, String address) {	// 고갱 생성자(이름, 폰번호, 주소를 매개변수로한)
+	public Person(String name, int phone, String address) {	// 고객 생성자(이름, 폰번호, 주소를 매개변수로한)
 		this.name = name;
 		this.phone = phone;
 		this.address = address;
