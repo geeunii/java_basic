@@ -73,7 +73,7 @@ public class Welcome {
                         quit = true;
                         break;
                     case 9:
-                        menuAdminLogin();
+                        menuAdminLogin();	// 관리자.
                         break;
                 }
             }
@@ -91,9 +91,9 @@ public class Welcome {
         System.out.println("******************************");
     }
 
-    public static void menuGuestInfo(String name, int mobile) {
+    public static void menuGuestInfo(String name, int mobile) {	// menuGuestInfo 는 문자열 변수 name 과 정수형 변수 mobile 을 파라미터로 받고 있음.
         System.out.println("현재 고객 정보 : ");
-        System.out.println("이름 " + mUser.getName() + "   연락처 " + mUser.getPhone());
+        System.out.println("이름 " + mUser.getName() + "   연락처 " + mUser.getPhone());	// 정적 변수 mUser 는 CartItem 클래스의 Name 과 Phone 을 받아옴.
     }
 
     public static void menuCartItemList() {
@@ -221,7 +221,7 @@ public class Welcome {
         return flag; // 반환
     }
 
-    public static void menuAdminLogin() {
+    public static void menuAdminLogin() {	// 관리자 로그인 정보.
         System.out.println("관리자 정보를 입력하세요");
 
         Scanner input = new Scanner(System.in);
@@ -231,11 +231,15 @@ public class Welcome {
         System.out.print("비밀번호 : ");
         String adminPW = input.next();
 
+        // Admin 클래스의 새로운 인스턴스(객체)를 만들고, 그 객체를 admin 이라는 변수에 할당
+        // mUser.getName()과 mUser.getPhone()을 생성자의 인자로 사용
+        // mUser 라는 객체에서 가져오고 있음
         Admin admin = new Admin(mUser.getName(), mUser.getPhone());
-        if (adminId.equals(admin.getId()) && adminPW.equals(admin.getPassword())) {
-            System.out.println("이름 " + admin.getName() + "   연락처 " + admin.getPhone());
-            System.out.println("아이디 " + admin.getId() + "   비밀번호 " + admin.getPassword());
+
+        if (adminId.equals(admin.getId()) && adminPW.equals(admin.getPassword())) {	// 입력한 adminId 가 새로 생성한 변수 admin 에게 받아온 getId 가 일치한지 그리고 비밀번호도 일치한지 비교
+            System.out.println("이름 " + admin.getName() + "   연락처 " + admin.getPhone());	// 일치한다면 받아온 admin 이름과 폰번호 출력
+            System.out.println("아이디 " + admin.getId() + "   비밀번호 " + admin.getPassword());	// 받아온 Id 와 Password 출력
         } else
-            System.out.println("관리자 정보가 일치하지 않습니다.");
+            System.out.println("관리자 정보가 일치하지 않습니다.");	// 일치하지 않다면 출력
     }
 }
