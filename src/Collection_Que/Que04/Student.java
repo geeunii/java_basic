@@ -1,4 +1,4 @@
-package Collection_Que.Que02.Que04;
+package Collection_Que.Que04;
 
 public class Student implements Comparable<Student> {
     public String id;

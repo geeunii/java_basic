@@ -1,4 +1,4 @@
-package Collection_Que.Que02.Que04;
+package Collection_Que.Que04;
 
 import java.util.TreeSet;
 
