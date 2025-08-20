@@ -11,6 +11,7 @@ import java.util.Date;
 @Builder    // Lombok Builder
 @NoArgsConstructor  // Lombok default 생성자
 @AllArgsConstructor // Lombok 생성자
+
 public class Board {
     private int bno;  //글번호
     private String bTitle;  // 글제목
