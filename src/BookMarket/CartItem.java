@@ -10,7 +10,7 @@ public class CartItem {
     // 매개변수로 받은 새로운 String[] 배열 값을 this.itemBook 멤버 변수에 할당(설정하는) 역할
     @Setter
     //private String[] itemBook = new String[7];    // itemBook 이라는 문자열 변수에 String 타입 요소를 7개 담을 수 있는 배열 생성
-    private Book itemBook;  // Book 클래스 적용
+    private Book itemBook;  // Book 타입의 itemBook 인스턴스
     private String bookID;    // bookID 라는 문자열 필드
     private int quantity;    // quantity 라는 정수 필드
     private int totalPrice;    // totalPrice 라는 정수 필드
@@ -58,5 +58,6 @@ public class CartItem {
         // 계산된 최종 값을 totalPrice 라는 멤버 변수에 할당
 
         totalPrice = this.itemBook.getUnitPrice() * this.quantity;
+        // itemBook 인스턴스에 받아온UnitPrice()와 생성자에서 초기화한 quantity 를 단가와 수량을 곱함.
     }
 }

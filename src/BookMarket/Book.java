@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class Book extends Item {
+public class Book extends Item {    // Item 클래스의 서브 클래스 Book
 
     private String author;
     private String description;

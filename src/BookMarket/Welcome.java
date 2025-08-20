@@ -7,15 +7,17 @@ public class Welcome {
     static final int NUM_ITEM = 7;
     // static 키워드는 이 배열이 객체 인스턴스가 아닌 클래스에 속하는 정적 변수
 
-    static CartItem[] mCartItem = new CartItem[NUM_BOOK];
-	// mCartItem 이라는 이름의 CartItem 객체 배열을 선언, NUM_BOOK 이라는 상수의 값(3)을 크기로 하는 CartItem 객체 배열을 새로 생성
+    // static CartItem[] mCartItem = new CartItem[NUM_BOOK];
+    // mCartItem 이라는 이름의 CartItem 객체 배열을 선언, NUM_BOOK 이라는 상수의 값(3)을 크기로 하는 CartItem 객체 배열을 새로 생성
 
     static int mCartCount = 0; // mCartCount 정수형 변수는 0으로 초기화.
+    static Cart mCart = new Cart();
     static User mUser;    // mUser 라는 이름의 User 타입 정적 변수를 선언
 
     public static void main(String[] args) {
 
-        String[][] mBook = new String[NUM_BOOK][NUM_ITEM];	// 2차원 문자열 mBook 변수에 새로운 2차원 문자열 배열을 생성하여 할당
+        // String[][] mBook = new String[NUM_BOOK][NUM_ITEM];	// 2차원 문자열 mBook 변수에 새로운 2차원 문자열 배열을 생성하여 할당
+        Book[] mBookList = new Book[NUM_BOOK];
 
         Scanner input = new Scanner(System.in);
         System.out.print("당신의 이름을 입력하세요 : ");
@@ -25,7 +27,7 @@ public class Welcome {
         int userMobile = input.nextInt();
 
 
-        mUser = new User(userName, userMobile);	// User 클래스의 객체를 생성하여 입력받은 고객의 정보 저장
+        mUser = new User(userName, userMobile);    // User 클래스의 객체를 생성하여 입력받은 고객의 정보 저장
 
         String greeting = "Welcome to Shopping Mall";
         String tagline = "Welcome to Book Market!";
@@ -57,7 +59,8 @@ public class Welcome {
                         menuCartClear();
                         break;
                     case 4:
-                        menuCartAddItem(mBook);
+                        // menuCartAddItem(mBook);
+                        menuCartAddItem(mBookList);
                         break;
                     case 5:
                         menuCartRemoveItemCount();
@@ -73,7 +76,7 @@ public class Welcome {
                         quit = true;
                         break;
                     case 9:
-                        menuAdminLogin();	// 관리자.
+                        menuAdminLogin();    // 관리자.
                         break;
                 }
             }
@@ -91,9 +94,9 @@ public class Welcome {
         System.out.println("******************************");
     }
 
-    public static void menuGuestInfo(String name, int mobile) {	// menuGuestInfo 는 문자열 변수 name 과 정수형 변수 mobile 을 파라미터로 받고 있음.
+    public static void menuGuestInfo(String name, int mobile) {    // menuGuestInfo 는 문자열 변수 name 과 정수형 변수 mobile 을 파라미터로 받고 있음.
         System.out.println("현재 고객 정보 : ");
-        System.out.println("이름 " + mUser.getName() + "   연락처 " + mUser.getPhone());	// 정적 변수 mUser 는 CartItem 클래스의 Name 과 Phone 을 받아옴.
+        System.out.println("이름 " + mUser.getName() + "   연락처 " + mUser.getPhone());    // 정적 변수 mUser 는 CartItem 클래스의 Name 과 Phone 을 받아옴.
     }
 
     public static void menuCartItemList() {
@@ -101,16 +104,17 @@ public class Welcome {
         System.out.println("---------------------------------------");
         System.out.println("    도서ID \t|     수량 \t|      합계");
         for (int i = 0; i < mCartCount; i++) {
-            System.out.print("    " + mCartItem[i].getBookID() + " \t| ");	// 책의 이름 출력
-            System.out.print("    " + mCartItem[i].getQuantity() + " \t| ");	// 책의 수량 출력
-            System.out.print("    " + mCartItem[i].getTotalPrice());	// 총 가격 출력
+            System.out.print("    " + mCartItem[i].getBookID() + " \t| ");    // 책의 이름 출력
+            System.out.print("    " + mCartItem[i].getQuantity() + " \t| ");    // 책의 수량 출력
+            System.out.print("    " + mCartItem[i].getTotalPrice());    // 총 가격 출력
             System.out.println("  ");
         }
         System.out.println("---------------------------------------");
     }
 
     public static void menuCartClear() {
-        System.out.println("장바구니 비우기");
+        // System.out.println("장바구니 비우기");
+        if (mCart.mCartCount == 0)
     }
 
     // 장바구니에 도서 추가하기
@@ -168,7 +172,37 @@ public class Welcome {
     }
 
     public static void menuCartRemoveItem() {
-        System.out.println("6. 장바구니의 항목 삭제하기");
+        // System.out.println("6. 장바구니의 항목 삭제하기");
+        if (mCart.mCartCount == 0) {
+            System.out.println("장비구니에 항목이 없습니다.");
+        } else {
+            menuCartItemList();
+            boolean quit = false;
+            while (!quit) {
+                System.out.print("장바구니에서 삭제할 도서의 ID를 입력하세요 : ");
+                Scanner sc = new Scanner(System.in);
+                String str = sc.nextLine();
+                boolean flag = false;
+                int numId = -1;
+
+                for (int i = 0; i < mCart.mCartCount; i++) {
+                    if (str.equals(mCart.mCartItem[i].getBookID())) {
+                        numId = i;
+                        flag = true;
+                        break;
+                    }
+                }
+                if (flag) {
+                    System.out.println("장바구니의 항목을 삭제하겠습니까? Y | N");
+                    str = sc.nextLine();
+                    if (str.toUpperCase().equals("Y")) {
+                        System.out.println(mCart.mCartItem[numId].getBookID() + "장바구니에서 도서가 삭제되었습니다.");
+                        mCart.removeCart(numId);
+                    }
+                    quit = true;
+                } else System.out.println("다시 입력해 주세요.");
+            }
+        }
     }
 
     public static void menuCartBill() {
@@ -179,41 +213,35 @@ public class Welcome {
         System.out.println("8. 종료");
     }
 
-    public static void BookList(String[][] book) {
+    public static void BookList(Book[] bookList) {
 
-        book[0][0] = "ISBN1234";
-        book[0][1] = "쉽게 배우는 JSP 웹 프로그래밍";
-        book[0][2] = "27000";
-        book[0][3] = "송미영";
-        book[0][4] = "단계별로 쇼핑몰을 구현하며 배우는 JSP 웹 프로그래밍 ";
-        book[0][5] = "IT전문서";
-        book[0][6] = "2018/10/08";
+        bookList[0] = new Book("ISBN1234", "쉽게 배우는 JSP 웹 프로그래밍", 27000);
+        bookList[0].setAuthor("송미영");
+        bookList[0].setDescription("단계별로 쇼핑몰을 구현하여 배우는 JSP 웹 프로그래밍");
+        bookList[0].setCategory("IT전문서");
+        bookList[0].setReleaseDate("2018/10/08");
 
-        book[1][0] = "ISBN1235";
-        book[1][1] = "안드로이드 프로그래밍";
-        book[1][2] = "33000";
-        book[1][3] = "우재남";
-        book[1][4] = "실습 단계별 명쾌한 멘토링!";
-        book[1][5] = "IT전문서";
-        book[1][6] = "2022/01/22";
+        bookList[1] = new Book("ISBN1235", "안드로이드 프로그래밍", 33000);
+        bookList[1].setAuthor("우재남");
+        bookList[1].setDescription("실습 단계별 명쾌한 멘토링!");
+        bookList[1].setCategory("IT전문서");
+        bookList[1].setReleaseDate("2022/01/22");
 
-        book[2][0] = "ISBN1236";
-        book[2][1] = "스크래치";
-        book[2][2] = "22000";
-        book[2][3] = "고광일";
-        book[2][4] = "컴퓨팅 사고력을 키우는 블록 코딩";
-        book[2][5] = "컴퓨터입문";
-        book[2][6] = "2019/06/10";
+        bookList[1] = new Book("ISBN1236", "스크래치", 22000);
+        bookList[1].setAuthor("고광일");
+        bookList[1].setDescription("컴퓨팅 사고력을 키우는 블록 코딩");
+        bookList[1].setCategory("컴퓨터입문");
+        bookList[1].setReleaseDate("2019/06/10");
     }
 
     public static boolean isCartInBook(String bookId) { // isCartInBook 메서드는 bookId 문자열 변수를 매개변수로 받고 있음.
 
         boolean flag = false;
-        for (int i = 0; i < mCartCount; i++) {	// 장바구니에 있는 상품의 개수(mCartCount)만큼 반복
-            if (bookId == mCartItem[i].getBookID()) {	// 장바구니에 담긴 각 상품(mCartItem[i])의 ID를 가져와서, 매개변수로 받은 bookId와 같은지 비교
+        for (int i = 0; i < mCartCount; i++) {    // 장바구니에 있는 상품의 개수(mCartCount)만큼 반복
+            if (bookId == mCartItem[i].getBookID()) {    // 장바구니에 담긴 각 상품(mCartItem[i])의 ID를 가져와서, 매개변수로 받은 bookId와 같은지 비교
 
                 mCartItem[i].setQuantity(mCartItem[i].getQuantity() + 1);
-				// 일치하는 책을 찾으면, 그 책의 현재 수량(getQuantity())에 1을 더해서 다시 설정(setQuantity())
+                // 일치하는 책을 찾으면, 그 책의 현재 수량(getQuantity())에 1을 더해서 다시 설정(setQuantity())
 
                 flag = true; // 책을 찾았으니 true
             }
@@ -221,7 +249,7 @@ public class Welcome {
         return flag; // 반환
     }
 
-    public static void menuAdminLogin() {	// 관리자 로그인 정보.
+    public static void menuAdminLogin() {    // 관리자 로그인 정보.
         System.out.println("관리자 정보를 입력하세요");
 
         Scanner input = new Scanner(System.in);
@@ -236,10 +264,10 @@ public class Welcome {
         // mUser 라는 객체에서 가져오고 있음
         Admin admin = new Admin(mUser.getName(), mUser.getPhone());
 
-        if (adminId.equals(admin.getId()) && adminPW.equals(admin.getPassword())) {	// 입력한 adminId 가 새로 생성한 변수 admin 에게 받아온 getId 가 일치한지 그리고 비밀번호도 일치한지 비교
-            System.out.println("이름 " + admin.getName() + "   연락처 " + admin.getPhone());	// 일치한다면 받아온 admin 이름과 폰번호 출력
-            System.out.println("아이디 " + admin.getId() + "   비밀번호 " + admin.getPassword());	// 받아온 Id 와 Password 출력
+        if (adminId.equals(admin.getId()) && adminPW.equals(admin.getPassword())) {    // 입력한 adminId 가 새로 생성한 변수 admin 에게 받아온 getId 가 일치한지 그리고 비밀번호도 일치한지 비교
+            System.out.println("이름 " + admin.getName() + "   연락처 " + admin.getPhone());    // 일치한다면 받아온 admin 이름과 폰번호 출력
+            System.out.println("아이디 " + admin.getId() + "   비밀번호 " + admin.getPassword());    // 받아온 Id 와 Password 출력
         } else
-            System.out.println("관리자 정보가 일치하지 않습니다.");	// 일치하지 않다면 출력
+            System.out.println("관리자 정보가 일치하지 않습니다.");    // 일치하지 않다면 출력
     }
 }
