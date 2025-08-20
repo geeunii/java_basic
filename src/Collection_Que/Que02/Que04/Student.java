@@ -1,0 +1,16 @@
+package Collection_Que.Que02.Que04;
+
+public class Student implements Comparable<Student> {
+    public String id;
+    public int score;
+
+    public Student(String id, int score) {
+        this.id = id;
+        this.score = score;
+    }
+
+    @Override
+    public int compareTo(Student o) {
+        return 0;
+    }
+}
