@@ -1,8 +1,9 @@
-package BookMarket;
+package BookMarket.com.market.cart;
+
+import BookMarket.com.market.bookitem.Book;
 
 public class Cart implements CartInterface {
-
-    static final int NUM_BOOK = 3;
+    static final int NUM_BOOK = 3;;
     CartItem[] mCartItem = new CartItem[NUM_BOOK];
     static int mCartCount = 0;
 

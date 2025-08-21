@@ -1,4 +1,4 @@
-package BookMarket;
+package BookMarket.com.market.member;
 
 public class Admin extends Person {	// Person 클래스를 상속받는 Admin 클래스.
 	private String id = "Admin";	// private 문자열 id 필드는 "Admin"으로 할당 받음

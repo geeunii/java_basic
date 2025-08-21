@@ -1,4 +1,4 @@
-package BookMarket;
+package BookMarket.com.market.bookitem;
 
 public abstract class Item {    // 추상 클래스 Item 여러 '실체 클래스'들의 공통적인 특성(필드나 메서드)을 추출해서 선언한 부분적으로만 구현
     String bookId;  // 문자열 bookId 필드 선언 - 책 번호

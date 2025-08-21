@@ -1,5 +1,6 @@
-package BookMarket;
+package BookMarket.com.market.cart;
 
+import BookMarket.com.market.bookitem.Book;
 import lombok.Getter;
 import lombok.Setter;
 

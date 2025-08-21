@@ -1,4 +1,4 @@
-package BookMarket;
+package BookMarket.com.market.bookitem;
 
 import lombok.Getter;
 import lombok.Setter;

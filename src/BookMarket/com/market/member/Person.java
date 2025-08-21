@@ -1,4 +1,4 @@
-package BookMarket;
+package BookMarket.com.market.member;
 
 public class Person {	// 고객 클래스 생성
 	private String name;	// 이름 필드
