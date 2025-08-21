@@ -100,7 +100,7 @@ public class Welcome {
     }
 
     public static void menuCartItemList() {
-        System.out.println("장바구니 상품 목록 :");
+/*        System.out.println("장바구니 상품 목록 :");
         System.out.println("---------------------------------------");
         System.out.println("    도서ID \t|     수량 \t|      합계");
         for (int i = 0; i < mCartCount; i++) {
@@ -109,24 +109,42 @@ public class Welcome {
             System.out.print("    " + mCartItem[i].getTotalPrice());    // 총 가격 출력
             System.out.println("  ");
         }
-        System.out.println("---------------------------------------");
+        System.out.println("---------------------------------------");*/
+
+        if (mCart.mCartCount >= 0) {
+            mCart.printCart();
+        }
+        }
     }
 
     public static void menuCartClear() {
         // System.out.println("장바구니 비우기");
-        if (mCart.mCartCount == 0)
+        if (mCart.mCartCount == 0) {
+            System.out.println("장바구니에 항목이 없습니다.");
+        } else {
+            System.out.println("장바구니의 모든 항목을 삭제하겠습니까? Y | N");
+            Scanner input = new Scanner(System.in);
+            String str = input.nextLine();
+
+            if (str.toUpperCase().equals("Y")) {
+                System.out.println("장바구니의 모든 항목을 삭제했습니다.");
+                mCart.deleteBook();
+            }
+        }
     }
 
     // 장바구니에 도서 추가하기
-    public static void menuCartAddItem(String[][] book) { // menuCartAddItem 메서드는 book 변수에 String 2차원 배열을 매개변수로 받음.
+    public static void menuCartAddItem(Book[] bookList) { // menuCartAddItem 메서드는 book 변수에 String 2차원 배열을 매개변수로 받음.
 
-        BookList(book);    // BookList 라는 메서드를 호출하면서 book 이라는 변수를 매개변수로 전달 -> 메서드의 기능을 실행하라고 요청
+        BookList(bookList);    // BookList 라는 메서드를 호출하면서 book 이라는 변수를 매개변수로 전달 -> 메서드의 기능을 실행하라고 요청
 
-        for (int i = 0; i < NUM_BOOK; i++) {    // 책의 수 : 행(row). 1차원.
+/*        for (int i = 0; i < NUM_BOOK; i++) {    // 책의 수 : 행(row). 1차원.
             for (int j = 0; j < NUM_ITEM; j++)    // 책 정보 : 열(col). 2차원
                 System.out.print(book[i][j] + " | ");    // 책 정보 표시
             System.out.println(" ");
-        }
+        }*/
+        mCart.printBookList(bookList);
+
         boolean quit = false;    // 논리형 quit 변수 설정. false 로 초기화.
 
         while (!quit) {
@@ -140,7 +158,7 @@ public class Welcome {
             int numId = -1;    // 정수형 변수 numId = -1로 초기화.
 
             for (int i = 0; i < NUM_BOOK; i++) {    // NUM_BOOK 까지 i 값이 커지면서 반복을 함.
-                if (str.equals(book[i][0])) {    // 변수 str 에 저장된 문자열이 book 배열의 특정 위치에 있는 문자열과 같은지 비교.
+                if (str.equals(bookList[i].getBookId())) {    // 변수 str 에 저장된 문자열이 book 배열의 특정 위치에 있는 문자열과 같은지 비교.
                     // 일치 한다면
                     numId = i;    // numId는 i를 할당받음.
                     flag = true;    // flag 변수를 true 로 할당
@@ -153,12 +171,13 @@ public class Welcome {
                 str = input.nextLine();    // 추가 할지 안할지.
 
                 if (str.toUpperCase().equals("Y")) {    // 입력받은 문자열을 모두 대문자 변환(toUpperCase()) -> y or Y 라면
-                    System.out.println(book[numId][0] + " 도서가 장바구니에 추가되었습니다.");    // numId에 저장된 행 인덱스와 [0] 열에 있는 책 ID를 출력
+                    System.out.println(bookList[numId].getBookId() + " 도서가 장바구니에 추가되었습니다.");    // numId에 저장된 행 인덱스와 [0] 열에 있는 책 ID를 출력
                     // 장바구니에 넣기
-                    if (!isCartInBook(book[numId][0]))    // 장바구니에 해당 책이 아직 없다면
-                        mCartItem[mCartCount++] = new CartItem(book[numId]);
-                    // 장바구니 배열 mCartItem 에 새로운 CartItem 객체를 생성하는 역할.
-                    // mCartCount++를 통해 아이템을 넣은 후 자동으로 다음 칸으로 옮김.
+                    if (!isCartInBook(bookList[numId].getBookId()))    // 장바구니에 해당 책이 아직 없다면
+                        //mCartItem[mCartCount++] = new CartItem(book[numId]);
+                        // 장바구니 배열 mCartItem 에 새로운 CartItem 객체를 생성하는 역할.
+                        // mCartCount++를 통해 아이템을 넣은 후 자동으로 다음 칸으로 옮김.
+                        mCart.insertBook(bookList[numId]);
                 }
                 quit = true;
             } else
@@ -236,7 +255,7 @@ public class Welcome {
 
     public static boolean isCartInBook(String bookId) { // isCartInBook 메서드는 bookId 문자열 변수를 매개변수로 받고 있음.
 
-        boolean flag = false;
+/*        boolean flag = false;
         for (int i = 0; i < mCartCount; i++) {    // 장바구니에 있는 상품의 개수(mCartCount)만큼 반복
             if (bookId == mCartItem[i].getBookID()) {    // 장바구니에 담긴 각 상품(mCartItem[i])의 ID를 가져와서, 매개변수로 받은 bookId와 같은지 비교
 
@@ -247,7 +266,8 @@ public class Welcome {
             }
         }
         return flag; // 반환
-    }
+    }*/
+        return mCart.isCartInBook(bookId);
 
     public static void menuAdminLogin() {    // 관리자 로그인 정보.
         System.out.println("관리자 정보를 입력하세요");
