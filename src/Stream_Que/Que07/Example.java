@@ -15,9 +15,8 @@ public class Example {
                 new Member("신용권", "개발자")
         );
 
-        List<Member> developers = list.stream().filter
-                (job -> job.getJob().equals("개발자")).toList();
+        List<Member> developers = list.stream().filter(job -> job.getJob().equals("개발자")).toList();
 
-        developers.stream().forEach(job -> System.out.println(job.getName()));
+        developers.forEach(job -> System.out.println(job.getName()));
     }
 }
