@@ -23,6 +23,7 @@ public class Prob10 {
             os.write('\n');
         }
 
+        os.flush();
         os.close();
         br.close();
         System.out.println("저장 완료!");
