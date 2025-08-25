@@ -17,5 +17,8 @@ public class Prob7 {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        // File imageFile = new File();
+        // imageFile.length();
     }
 }
