@@ -95,9 +95,11 @@ public class EchoServer {
 		
 	public static void stopServer() {
 		try {
-			//ServerSocket을 닫고 Port 언바인딩
+			//ServerSocket 을 닫고 Port 언바인딩
 			serverSocket.close();
 			System.out.println( "[서버] 종료됨 ");
-		} catch (IOException e1) {}
+		} catch (IOException e1) {
+			e1.fillInStackTrace();
+		}
 	}
 }
