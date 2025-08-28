@@ -50,7 +50,7 @@ public class ClientHandler implements Runnable {
                 this.nickname = proposedNickname;
                 Server.addClient(this.nickname, this); // 서버의 접속자 목록에 추가
                 System.out.println("[Server] " + nickname + " joined");
-                out.println("OK " + nickname + "joined");
+                out.println("OK " + nickname + " joined");
                 Server.broadcastMessage(nickname + " joined");
                 break; // 닉네임 등록 성공, 루프 종료
             }
@@ -67,8 +67,12 @@ public class ClientHandler implements Runnable {
                 }
             }
         } catch (IOException e) {
-            // 통신 중 연결이 끊기면 발생하는 예외
-            System.err.println("[ClientHandler] 통신 중 오류 발생: " + e.getMessage());
+            // 연결이 끊어진 경우.
+            if (e.getMessage().equals("Socket closed")) {
+                System.out.println("정상적으로 연결 종료됨.");
+            } else {
+                System.out.println("통신 중 오류 발생: " + e.getMessage());
+            }
         } finally {
             // 연결 종료 시 정리
             if (nickname != null) {
