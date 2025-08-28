@@ -6,108 +6,63 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 
-public class Client implements Runnable {
-    private final Socket clientSocket;
-    private String nickname;
-    private PrintWriter out;
+public class Client {
 
-    // ClientHandler 생성자. 클라이언트와 연결된 소켓을 받아서 초기화.
-    public Client(Socket socket) {
-        this.clientSocket = socket;
-    }
+    // 클라이언트 애플리케이션의 시작점
+    public static void main(String[] args) {
+        // 인자가 부족할 경우 사용법을 안내
+        if (args.length != 3) {
+            System.out.println("사용법: java Client <서버IP> <포트> <닉네임>");
+            return;
+        }
 
-    @Override
-    public void run() {
-        // try-with-resources 이 블록을 벗어나면 스트림과 소켓이 자동으로 닫힘
+        String serverIp = args[0];
+        int port = Integer.parseInt(args[1]);
+        String nickname = args[2];
+
         try (
-                BufferedReader br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(), StandardCharsets.UTF_8));
-                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true, StandardCharsets.UTF_8);
+                Socket socket = new Socket(serverIp, port);
+                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true, StandardCharsets.UTF_8);
+                Scanner scanner = new Scanner(System.in)
         ) {
-            // 클래스 변수 `out`에 현재 스트림을 할당
-            this.out = out;
+            System.out.println("서버에 연결되었습니다. 닉네임 등록을 진행합니다.");
 
-            // 닉네임 등록
+            // ⭐ 서버로부터의 메시지 수신을 전담하는 스레드 시작
+            // 이 스레드는 서버 메시지를 받아 화면에 출력하는 역할만 수행
+            Thread readerThread = new Thread(() -> {
+                try {
+                    String serverMessage;
+                    while ((serverMessage = in.readLine()) != null) {
+                        System.out.println(serverMessage);
+                    }
+                } catch (IOException e) {
+                    System.err.println("서버 연결이 끊어졌습니다.");
+                }
+            });
+            readerThread.start();
+
+            // 닉네임 등록 로직
+            out.println("NICK " + nickname);
+
+            // 사용자 입력 및 전송 루프
+            String userMessage;
             while (true) {
-                out.println("NICK <이름>");
-                String message = br.readLine();
-
-                // 메시지가 없거나 형식이 잘못되면 다시 요청
-                if (message == null || !message.startsWith("NICK ")) {
-                    out.println("ERR : 잘못된 형식입니다.");
-                    continue;
+                userMessage = scanner.nextLine();
+                if ("/quit".equalsIgnoreCase(userMessage)) {
+                    out.println(userMessage); // 서버에 종료 알림
+                    break;
                 }
-
-                // 닉네임 추출 및 공백 제거
-                String proposedNickname = message.substring(5).trim();
-
-                // 닉네임이 비어있거나, 이미 사용 중이면 오류 메시지 전송
-                if (proposedNickname.isEmpty() || Server.isNicknameInUse(proposedNickname)) {
-                    out.println("ERR : 사용 중이거나 유효하지 않은 닉네임입니다.");
-                    continue;
-                }
-
-                this.nickname = proposedNickname;
-                Server.addClient(this.nickname, this); // 서버의 접속자 목록에 추가
-                System.out.println("[Server] " + nickname + " joined");
-                out.println("OK " + nickname + "joined");
-                Server.broadcastMessage(nickname + " joined");
-                break; // 닉네임 등록 성공, 루프 종료
+                out.println(userMessage);
             }
 
-            // 메인 통신
-            String line;
-            while ((line = br.readLine()) != null) {
-                // '/'로 시작하는지 확인하여 명령어를 처리
-                if (line.startsWith("/")) {
-                    handleCommand(line);
-                } else {
-                    // 일반 채팅 메시지는 모든 클라이언트에게 브로드캐스트
-                    Server.broadcastMessage("[" + nickname + "]" + line);
-                }
-            }
+            System.out.println("채팅을 종료합니다.");
+            readerThread.interrupt(); // 리더 스레드 종료
+
         } catch (IOException e) {
-            // 통신 중 연결이 끊기면 발생하는 예외
-            System.err.println("[ClientHandler] 통신 중 오류 발생: " + e.getMessage());
-        } finally {
-            // 연결 종료 시 정리
-            if (nickname != null) {
-                // 접속자 목록에서 해당 클라이언트 제거
-                Server.removeClient(this.nickname);
-                // 모든 사용자에게 퇴장 알림 전송
-                Server.broadcastMessage(nickname + " left");
-                System.out.println("[Server] " + nickname + " left");
-            }
-            try {
-                // 소켓이 열려있으면 닫기
-                if (clientSocket != null) clientSocket.close();
-            } catch (IOException e) {
-                System.out.println("[ClientHandler] 소켓 닫기 오류: " + e.getMessage());
-            }
+            System.err.println("서버 연결 중 오류가 발생했습니다: " + e.getMessage());
         }
-    }
-
-    // 클라이언트로부터 받은 명령어를 처리
-    private void handleCommand(String command) {
-        if ("/quit".equalsIgnoreCase(command)) {
-            // /quit 명령어를 받으면 소켓을 닫아 연결 종료를 유도
-            try {
-                clientSocket.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        } else if ("/who".equalsIgnoreCase(command)) {
-            // /who 명령어를 받으면 현재 접속자 목록을 가져와 전송
-            String users = String.join(", ", Server.getConnectedUsers());
-            sendMessage("현재 접속자: " + users);
-        } else {
-            // 알 수 없는 명령어에 대한 안내
-            sendMessage("ERR : 알 수 없는 명령어입니다.");
-        }
-    }
-
-    // 클라이언트에게 메시지를 전송
-    public void sendMessage(String message) {
-        out.println(message);
     }
 }

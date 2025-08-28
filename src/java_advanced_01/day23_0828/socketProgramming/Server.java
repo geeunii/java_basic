@@ -12,14 +12,14 @@ import java.util.concurrent.Executors;
 
 public class Server {
 
-    public static final int PORT = 5000;    // 상수 : 서버가 사용할 포트 번호
+    public static final int PORT = 5010;    // 상수 : 서버가 사용할 포트 번호
     public static ServerSocket serverSocket = null; // 서버 소켓 : 클라이언트의 연결 요청을 받기 위한 메인 소켓
     public static ExecutorService executorService = null;   // 스레드풀 : 클라이언트 처리를 위한 스레드들을 관리
 
     // 접속 중인 클라이언트들을 저장하는 맵 (닉네임 -> ClientHandler 객체)
     // ConcurrentHashMap 은 여러 스레드가 동시에 접근해도 안전 -> HashMap 이 멀티스레드 환경에서 안전하지 않은 문제를 해결하기 위한 고안된 유틸리티.
     // 맵의 일부에만 잠금을 거는 방식을 사용 [세그머트 잠금, 동시 접근 허용, 성능 향상]
-    private static final Map<String, Client> clients = new ConcurrentHashMap<>();
+    private static final Map<String, ClientHandler> clients = new ConcurrentHashMap<>();
 
     public static void main(String[] args) {
         // 프로그램이 종료될 때(Ctrl+C 등) 자원을 정리하기 위한 "종료 훅" 등록
@@ -58,7 +58,7 @@ public class Server {
 
                 // 새로운 클라이언트 처리 작업을 스레드풀에 제출
                 // ClientHandler 객체가 클라이언트와의 통신을 전달함
-                executorService.submit(new Client(socket));
+                executorService.submit(new ClientHandler(socket));
             }
         } catch (IOException e) {
             System.out.println("[Server] 소켓 생성 오류: " + e.getMessage());
@@ -69,7 +69,7 @@ public class Server {
     // --- 클라이언트 목록 관리 메서드 ---
 
     // 새로운 클라이언트를 접속자 목록에 추가
-    public static void addClient(String nickname, Client handler) {
+    public static void addClient(String nickname, ClientHandler handler) {
         clients.put(nickname, handler);
     }
 
@@ -91,7 +91,7 @@ public class Server {
     // 모든 접속자에게 메시지를 전송
     public static void broadcastMessage(String message) {
         // 모든 클라이언트 핸들러를 순회하며 메시지 전송
-        for (Client client : clients.values()) {
+        for (ClientHandler client : clients.values()) {
             client.sendMessage(message);
         }
     }
