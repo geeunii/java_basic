@@ -17,7 +17,8 @@ public class Server {
     public static ExecutorService executorService = null;   // 스레드풀 : 클라이언트 처리를 위한 스레드들을 관리
 
     // 접속 중인 클라이언트들을 저장하는 맵 (닉네임 -> ClientHandler 객체)
-    // ConcurrentHashMap 은 여러 스레드가 동시에 접근해도 안전
+    // ConcurrentHashMap 은 여러 스레드가 동시에 접근해도 안전 -> HashMap 이 멀티스레드 환경에서 안전하지 않은 문제를 해결하기 위한 고안된 유틸리티.
+    // 맵의 일부에만 잠금을 거는 방식을 사용 [세그머트 잠금, 동시 접근 허용, 성능 향상]
     private static final Map<String, Client> clients = new ConcurrentHashMap<>();
 
     public static void main(String[] args) {

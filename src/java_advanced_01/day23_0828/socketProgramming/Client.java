@@ -34,6 +34,7 @@ public class Client implements Runnable {
 
                 // 메시지가 없거나 형식이 잘못되면 다시 요청
                 if (message == null || !message.startsWith("NICK ")) {
+                    out.println("ERR : 잘못된 형식입니다.");
                     continue;
                 }
 
@@ -42,13 +43,14 @@ public class Client implements Runnable {
 
                 // 닉네임이 비어있거나, 이미 사용 중이면 오류 메시지 전송
                 if (proposedNickname.isEmpty() || Server.isNicknameInUse(proposedNickname)) {
-                    out.println("사용 중이거나 유효하지 않은 닉네임입니다.");
+                    out.println("ERR : 사용 중이거나 유효하지 않은 닉네임입니다.");
                     continue;
                 }
 
                 this.nickname = proposedNickname;
                 Server.addClient(this.nickname, this); // 서버의 접속자 목록에 추가
                 System.out.println("[Server] " + nickname + " joined");
+                out.println("OK " + nickname + "joined");
                 Server.broadcastMessage(nickname + " joined");
                 break; // 닉네임 등록 성공, 루프 종료
             }
@@ -100,7 +102,7 @@ public class Client implements Runnable {
             sendMessage("현재 접속자: " + users);
         } else {
             // 알 수 없는 명령어에 대한 안내
-            sendMessage("알 수 없는 명령어입니다.");
+            sendMessage("ERR : 알 수 없는 명령어입니다.");
         }
     }
 
