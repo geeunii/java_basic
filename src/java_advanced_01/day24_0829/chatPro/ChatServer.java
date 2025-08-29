@@ -23,6 +23,7 @@ public class ChatServer {
 
     // = Collections.synchronizedMap(new HashMap<>());
     // 1인용 공중 화장실, 여러 개의 칸이 있는 공중 화장실.
+
     public static void main(String[] args) {
         try {
             ChatServer chatServer = new ChatServer();
@@ -33,13 +34,13 @@ public class ChatServer {
             System.out.println("----------------------------------------------------");
 
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            while(true) {
+            while (true) {
                 String key = br.readLine();
-                if(key.equals("q")) 	break;
+                if (key.equals("q")) break;
             }
             br.close();
             chatServer.stop();
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("[서버] " + e.getMessage());
         }
     }

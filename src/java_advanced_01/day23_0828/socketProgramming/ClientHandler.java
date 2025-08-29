@@ -7,24 +7,30 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
+// 서버에 연결된 개별 클라이언트와의 통신을 전담하는 역할
+// 각 클라이언트 연결마다 이 클래스의 인스턴스가 생성되며, 스레드풀에서 독립적으로 실행됨.
 public class ClientHandler implements Runnable {
     private final Socket clientSocket;
     private String nickname;
     private PrintWriter out;
 
-    // ClientHandler 생성자. 클라이언트와 연결된 소켓을 받아서 초기화.
+    // socket 클라이언트와 연결된 소켓. 이 소켓을 통해 데이터를 주고 받음.
     public ClientHandler(Socket socket) {
         this.clientSocket = socket;
     }
 
     @Override
     public void run() {
-        // try-with-resources 이 블록을 벗어나면 스트림과 소켓이 자동으로 닫힘
+        // try-with-resources 이 블록을 벗어나면 스트림(br, out)과 소켓이 자동으로 닫힘
         try (
                 BufferedReader br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(), StandardCharsets.UTF_8));
+
+                // 클라이언트에게 메시지를 보낼 통로: PrintWriter
+                // new PrintWriter: 글자를 바이트로 변환해줌
+                // true: 줄바꿈을 포함하는 메서드를 호출할 때마다, 버퍼에 쌓아두지 않고 즉시 데이터를 전송함
                 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true, StandardCharsets.UTF_8);
         ) {
-            // 클래스 변수 `out`에 현재 스트림을 할당
+            // 클래스 변수 `out`에 현재 스트림을 할당. 클래스 전체에서 소켓 출력 스트림을 사용하기 위함.
             this.out = out;
 
             // 닉네임 등록
