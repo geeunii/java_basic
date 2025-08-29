@@ -28,14 +28,14 @@ public class ClientHandler implements Runnable {
                 // 클라이언트에게 메시지를 보낼 통로: PrintWriter
                 // new PrintWriter: 글자를 바이트로 변환해줌
                 // true: 줄바꿈을 포함하는 메서드를 호출할 때마다, 버퍼에 쌓아두지 않고 즉시 데이터를 전송함
-                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true, StandardCharsets.UTF_8);
+                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true, StandardCharsets.UTF_8)
         ) {
             // 클래스 변수 `out`에 현재 스트림을 할당. 클래스 전체에서 소켓 출력 스트림을 사용하기 위함.
             this.out = out;
 
             // 닉네임 등록
             while (true) {
-                out.println("NICK <이름>");
+                // out.println("NICK <이름>");
                 String message = br.readLine();
 
                 // 메시지가 없거나 형식이 잘못되면 다시 요청
@@ -56,7 +56,7 @@ public class ClientHandler implements Runnable {
                 this.nickname = proposedNickname;
                 Server.addClient(this.nickname, this); // 서버의 접속자 목록에 추가
                 System.out.println("[Server] " + nickname + " joined");
-                out.println("OK " + nickname + " joined");
+                out.println("Welcome " + nickname + " !!");
                 Server.broadcastMessage(nickname + " joined");
                 break; // 닉네임 등록 성공, 루프 종료
             }

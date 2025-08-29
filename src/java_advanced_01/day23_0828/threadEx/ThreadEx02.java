@@ -1,4 +1,4 @@
-package java_advanced_01.day23_0828;
+package java_advanced_01.day23_0828.threadEx;
 
 import lombok.Getter;
 import lombok.Setter;

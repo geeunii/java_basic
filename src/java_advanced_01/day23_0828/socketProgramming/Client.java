@@ -33,7 +33,7 @@ public class Client {
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true, StandardCharsets.UTF_8); // 서버로 메시지를 보내기 위한 스트림
                 Scanner scanner = new Scanner(System.in) // 사용자의 키보드 입력을 읽기 위한 객체
         ) {
-            System.out.println("서버에 연결되었습니다. 닉네임 등록을 진행합니다.");
+            System.out.println("서버에 연결되었습니다.");
 
             // --- 3. 메시지 수신 스레드 시작 (동시 작업) ---
             // 키보드 입력과 서버 메시지 수신은 동시에 이루어져야 합니다.

@@ -1,4 +1,4 @@
-package java_advanced_01.day23_0828;
+package java_advanced_01.day23_0828.threadEx;
 
 public class ThreadEx01 {
     public static void main(String[] args) {
