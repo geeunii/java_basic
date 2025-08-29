@@ -49,7 +49,7 @@ public class Server {
             serverSocket = new ServerSocket(PORT);  // 서버 소켓 생성 및 포트 바인딩
 
             executorService = Executors.newCachedThreadPool(); // 스레드풀 생성 (스레드 수 제한 X)
-            // executorService = Executors.newFixedThreadPool(100); // 스레드 100 제한
+            // threadPool = Executors.newFixedThreadPool(100); // 스레드 100 제한
             System.out.println("[Server] Start. PORT " + PORT + "번 대기 중");
 
             while (!serverSocket.isClosed()) {  // 서버가 종료될 때 까지 클라이언트 연결 계속 받음
