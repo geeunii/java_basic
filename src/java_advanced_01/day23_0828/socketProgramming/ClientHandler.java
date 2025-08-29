@@ -35,7 +35,7 @@ public class ClientHandler implements Runnable {
 
             // 닉네임 등록
             while (true) {
-                // out.println("NICK <이름>");
+                out.println("NICK <이름>");
                 String message = br.readLine();
 
                 // 메시지가 없거나 형식이 잘못되면 다시 요청
