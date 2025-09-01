@@ -45,7 +45,7 @@ public class StudentInput {
             System.out.print("이름: ");
             String name = sc.nextLine();
 
-            if ("^^".equals(name)) {
+            if ("^^".equals(name) || "exit".equalsIgnoreCase(name)) {
                 System.out.println("입력을 종료합니다.");
                 break;
             }
@@ -81,7 +81,7 @@ public class StudentInput {
                 if (isValid) {
                     Student student = new Student(name, scores);
                     studentInfo.put(name, student);
-                    System.out.println("=> 저장됨: " + name + " (총점=" + student.getTotal() + ", 평균=" + student.getAverage() + ", 학점=" + student.getGrade() + ")");
+                    System.out.println("=> 저장됨: " + name + " (총점=" + student.getTotal() + ", 평균=" + student.getAverage() + ", 학점=" + student.getGrade() + ")\n");
                 }
 
             } catch (NumberFormatException e) {

@@ -2,21 +2,23 @@ package Grade_Management;
 
 import lombok.Getter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
 @Getter
-public class Student implements Serializable {
+public class Student implements Serializable { // 학생 1명의 성적 정보를 표현하는 직렬화 가능한 도메인 클래스
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
-    private String name;
-    private List<Integer> record;
+    private final String name;
+    private final List<Integer> record;
     private int total;
     private double average;
     private String grade;
 
-
+    // Student 생성자(String 타입의 name 변수, Integer 타입을 가진 배열 record 변수 parameter 선언)
     public Student(String name, List<Integer> record) {
         this.name = name;
         this.record = record;
@@ -52,9 +54,11 @@ public class Student implements Serializable {
     }
 
     @Override
-    public String toString() {
+    public String toString() {  // 출력 포맷
         return "이름: " + name + "\n" +
                 "점수: " + record + "\n" +
-                "총점: " + total + ", 평균: " + String.format("%.1f", average) + ", 학점: " + grade;
+                "총점: " + total + ", 평균: " +
+                String.format("%.1f", average) +
+                ", 학점: " + grade;
     }
 }

@@ -49,7 +49,7 @@ public class StudentOutput {
     }
 
     private static void printInfo(List<Student> studentList) {
-        System.out.println("\n[평균 오름차순 성적표]");
+        System.out.println("\n[평균 오름차순 성적표]\n");
         int rank = 1;
         for (Student student : studentList) {
             System.out.println(rank + ") " + student.getName());
@@ -58,6 +58,7 @@ public class StudentOutput {
             System.out.println("   총점: " + student.getTotal() +
                     ", 평균: " + String.format("%.1f", student.getAverage()) +
                     ", 학점: " + student.getGrade());
+            System.out.println();
             rank++;
         }
     }

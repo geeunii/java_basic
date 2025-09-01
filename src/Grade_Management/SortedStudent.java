@@ -36,11 +36,10 @@ public class SortedStudent {
     }
 
     private static TreeSet<Student> createTreeSet() {
-        // 정렬 규칙을 정의하는 Comparator 객체 생성
         Comparator<Student> avgComparator = new Comparator<Student>() {
             @Override
             public int compare(Student s1, Student s2) {
-                // 1차: 평균을 기준으로 오름차순 정렬
+                // ... (기존 정렬 로직)
                 int avgCompare = Double.compare(s1.getAverage(), s2.getAverage());
                 if (avgCompare != 0) {
                     return avgCompare;
@@ -48,13 +47,11 @@ public class SortedStudent {
                 return s1.getName().compareTo(s2.getName());
             }
         };
-
-        // 위에서 정의한 정렬 규칙을 사용하는 TreeSet 생성
         TreeSet<Student> sortedSet = new TreeSet<>(avgComparator);
-        // HashMap의 모든 학생 정보를 TreeSet에 추가 (자동으로 정렬됨)
         sortedSet.addAll(studentInfo.values());
         return sortedSet;
     }
+
 
     private static void printResult(TreeSet<Student> sortedSet) {
         System.out.println("\n[정렬 및 저장: 평균 오름차순]");
@@ -62,17 +59,22 @@ public class SortedStudent {
         System.out.println("저장 대상(미리보기):");
         for (Student s : sortedSet) {
             System.out.println("- " + s.getName() + " (평균 " + String.format("%.1f", s.getAverage()) + ")");
-
         }
+        System.out.println();
     }
 
     private static void outputObject(TreeSet<Student> sortedSet) {
+        // 정렬된 TreeSet을 직렬화 가능한 ArrayList로 변환합니다.
+        ArrayList<Student> sortedList = new ArrayList<>(sortedSet);
+
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(avgFile))) {
-            oos.writeObject(sortedSet);
+            // ArrayList 객체를 파일에 저장합니다.
+            oos.writeObject(sortedList);
             System.out.println("결과 파일: " + avgFile);
             System.out.println("[완료] 정렬된 결과를 파일로 저장했습니다.");
         } catch (IOException e) {
-            System.out.println("[오류] 정렬된 결과를 파일에 저장하는 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("[오류] 정렬된 결과를 파일에 저장하는 중 오류가 발생했습니다.");
+            e.printStackTrace();
         }
     }
 }
