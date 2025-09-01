@@ -50,8 +50,8 @@
       <schema-mapping>
         <introspection-scope>
           <node kind="schema">
-            <name qname="@" />
             <name qname="shop_db" />
+            <name qname="@" />
           </node>
         </introspection-scope>
       </schema-mapping>
