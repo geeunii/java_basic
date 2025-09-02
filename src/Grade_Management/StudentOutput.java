@@ -7,24 +7,27 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
-public class StudentOutput {
+public class StudentOutput { // student.dat 에서 학생 객체들을 읽어와 평균 기준 오름차순으로 정렬 후 화면 출력
 
+    // 동일하게 생성
     private static HashMap<String, Student> studentInfo = new HashMap<>();
     private static final File file = new File("Temp/student.dat");
 
     public static void main(String[] args) {
-        // 1. 파일에서 객체를 불러옵니다.
+        // 파일에서 객체를 불러옵니다.
         if (loadObjectFromFile()) {
-            // 2. 데이터를 평균 순으로 정렬합니다.
+            // 데이터를 평균 순으로 정렬합니다.
             List<Student> sortedList = rearrangeData();
-            // 3. 정렬된 결과를 화면에 출력합니다.
+            // 정렬된 결과를 화면에 출력합니다.
             printInfo(sortedList);
         }
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")  // 제네릭 타입 경고 처리
     private static boolean loadObjectFromFile() {
+        // 파일에서 객체를 읽어드림
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+            // ois.readObject() 파일에 저장된 객체를 읽어서 반환.
             studentInfo = (HashMap<String, Student>) ois.readObject();
             return true;
         } catch (FileNotFoundException e) {
@@ -37,18 +40,16 @@ public class StudentOutput {
     }
 
     private static List<Student> rearrangeData() {
-        // HashMap의 값들(Student 객체)을 ArrayList로 변환합니다.
+        // studentInfo HashMap 에 저장된 모든 값들, Student 객체들을 컬렉션 형태로 반환.
+        // 반환된 Student 객체들의 컬렉션을 가지고 새로운 ArrayList 생성. studentList 라는 이름의 List 변수에 모든 학생 객체들이 담기게 됨.
         List<Student> studentList = new ArrayList<>(studentInfo.values());
 
-        // Comparator를 사용하여 평균(average) 기준으로 오름차순 정렬합니다.
-        // 초보자가 이해하기 쉬운 익명 클래스 방식으로 Comparator를 구현합니다.
-        studentList.sort(new Comparator<Student>() {
-            @Override
-            public int compare(Student s1, Student s2) {
-                // s1의 평균이 s2의 평균보다 작으면 음수, 크면 양수, 같으면 0을 반환
-                return Double.compare(s1.getAverage(), s2.getAverage());
-            }
-        });
+        // Comparator 를 사용하여 평균(average) 기준으로 오름차순 정렬.
+        // 람다식. studentList 를 정렬 하는데 Comparator(두 객체를 비교하여 정렬 순서를 결정)
+        // 이 제공하는 인터페이 comparingDouble 정적 메서드로 더블 타입의 값을 기준으로 객체를 비교
+        // studentList 의 각 Student 객체에 대해 메서드 호출. 그 반환 값인 ㅍ여균 점수를 기준으로 사용
+        // 즉, 학생들의 평균 점수를 기준으로 오름차순으로 정렬
+        studentList.sort(Comparator.comparingDouble(Student::getAverage));
 
         return studentList;
     }
