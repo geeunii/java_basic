@@ -931,7 +931,7 @@ shop_db|schema||shopadmin|localhost|UPDATE|G</Grants>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="290" parent="1" name="shop_db">
-      <LastIntrospectionLocalTimestamp>2025-09-02.00:27:00</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2025-09-02.07:44:36</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <user id="291" parent="1" name="shopadmin">
