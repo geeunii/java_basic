@@ -30,12 +30,13 @@ public class Student implements Serializable { // 학생 1명의 성적 정보�
     private void calculateStats() {
         // 총점 계산
         this.total = 0;
-        for (int score : this.record) {
+        for (int score : this.record) { // for-each.
             this.total += score;
         }
 
         // 평균 계산
-        if (!this.record.isEmpty()) {
+        if (!this.record.isEmpty()) {   // record 가 비어있지 않다면
+            // average 변수에 총합과 record 의 길이를 나눈걸 할당한다.
             this.average = (double) this.total / this.record.size();
         }
 

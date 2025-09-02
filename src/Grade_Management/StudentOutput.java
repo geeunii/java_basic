@@ -18,6 +18,7 @@ public class StudentOutput {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private static boolean loadObjectFromFile() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
             studentInfo = (HashMap<String, Student>) ois.readObject();

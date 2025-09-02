@@ -5,7 +5,9 @@ import java.util.*;
 
 public class StudentInput {
 
+    // 전역 변수 HashMap<T, V> 변수에 새로운 HashMap<>() 생성.
     private static HashMap<String, Student> studentInfo = new HashMap<>();
+    // 상수 File 타입 file 변수에 새로운 File 타입인 위치 생성
     private static final File file = new File("Temp/student.dat");
 
     public static void main(String[] args) {
@@ -19,9 +21,10 @@ public class StudentInput {
         saveData();
     }
 
+    @SuppressWarnings("unchecked")  // 제네릭 타입 때문에 발생한 경고 처리
     private static void loadCheck() {
 
-        if (file.exists()) {
+        if (file.exists()) {    // file 이 존재하는지 체크
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
                 studentInfo = (HashMap<String, Student>) ois.readObject();
             } catch (IOException | ClassNotFoundException e) {

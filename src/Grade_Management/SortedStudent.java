@@ -24,6 +24,7 @@ public class SortedStudent {
     private static boolean loadObjectFromFile() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
             studentInfo = (HashMap<String, Student>) ois.readObject();
+            System.out.println("[정렬 및 저장: 평균 오름차순]");
             System.out.println("불러온 학생 수: " + studentInfo.size());
             return true;
         } catch (FileNotFoundException e) {
@@ -54,9 +55,8 @@ public class SortedStudent {
 
 
     private static void printResult(TreeSet<Student> sortedSet) {
-        System.out.println("\n[정렬 및 저장: 평균 오름차순]");
-        System.out.println("정렬 규칙: 평균 ASC, 평균 동률이면 이름 사전순 ASC");
-        System.out.println("저장 대상(미리보기):");
+        System.out.println("정렬 규칙: 평균 ASC, 평균 동률이면 이름 사전순 ASC\n");
+        System.out.println("저장 대상(미리보기 상위 10명):");
         for (Student s : sortedSet) {
             System.out.println("- " + s.getName() + " (평균 " + String.format("%.1f", s.getAverage()) + ")");
         }

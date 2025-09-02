@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataSource name="bookmarketdb">
+<dataSource name="hr">
   <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.53">
     <root id="1">
       <DefaultCasing>mixed/mixed</DefaultCasing>
       <DefaultEngine>InnoDB</DefaultEngine>
       <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
-      <Grants>bookmarketdb|schema||bookadmin|localhost|ALTER|G
-bookmarketdb|schema||bookadmin|localhost|ALTER ROUTINE|G
-bookmarketdb|schema||bookadmin|localhost|CREATE|G
-bookmarketdb|schema||bookadmin|localhost|CREATE ROUTINE|G
-bookmarketdb|schema||bookadmin|localhost|CREATE TEMPORARY TABLES|G
-bookmarketdb|schema||bookadmin|localhost|CREATE VIEW|G
-bookmarketdb|schema||bookadmin|localhost|DELETE|G
-bookmarketdb|schema||bookadmin|localhost|DROP|G
-bookmarketdb|schema||bookadmin|localhost|EVENT|G
-bookmarketdb|schema||bookadmin|localhost|EXECUTE|G
-bookmarketdb|schema||bookadmin|localhost|INDEX|G
-bookmarketdb|schema||bookadmin|localhost|INSERT|G
-bookmarketdb|schema||bookadmin|localhost|LOCK TABLES|G
-bookmarketdb|schema||bookadmin|localhost|REFERENCES|G
-bookmarketdb|schema||bookadmin|localhost|SELECT|G
-bookmarketdb|schema||bookadmin|localhost|SHOW VIEW|G
-bookmarketdb|schema||bookadmin|localhost|TRIGGER|G
-bookmarketdb|schema||bookadmin|localhost|UPDATE|G</Grants>
+      <Grants>hr|schema||hr|localhost|ALTER|G
+hr|schema||hr|localhost|ALTER ROUTINE|G
+hr|schema||hr|localhost|CREATE|G
+hr|schema||hr|localhost|CREATE ROUTINE|G
+hr|schema||hr|localhost|CREATE TEMPORARY TABLES|G
+hr|schema||hr|localhost|CREATE VIEW|G
+hr|schema||hr|localhost|DELETE|G
+hr|schema||hr|localhost|DROP|G
+hr|schema||hr|localhost|EVENT|G
+hr|schema||hr|localhost|EXECUTE|G
+hr|schema||hr|localhost|INDEX|G
+hr|schema||hr|localhost|INSERT|G
+hr|schema||hr|localhost|LOCK TABLES|G
+hr|schema||hr|localhost|REFERENCES|G
+hr|schema||hr|localhost|SELECT|G
+hr|schema||hr|localhost|SHOW VIEW|G
+hr|schema||hr|localhost|TRIGGER|G
+hr|schema||hr|localhost|UPDATE|G</Grants>
       <ServerVersion>8.0.43</ServerVersion>
     </root>
     <collation id="2" parent="1" name="armscii8_bin">
@@ -924,133 +924,14 @@ bookmarketdb|schema||bookadmin|localhost|UPDATE|G</Grants>
     <collation id="287" parent="1" name="utf8mb4_zh_0900_as_cs">
       <Charset>utf8mb4</Charset>
     </collation>
-    <schema id="288" parent="1" name="bookmarketdb">
-      <LastIntrospectionLocalTimestamp>2025-09-02.00:26:57</LastIntrospectionLocalTimestamp>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
-    </schema>
-    <schema id="289" parent="1" name="information_schema">
+    <schema id="288" parent="1" name="information_schema">
       <CollationName>utf8mb3_general_ci</CollationName>
     </schema>
-    <schema id="290" parent="1" name="performance_schema">
+    <schema id="289" parent="1" name="performance_schema">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <user id="291" parent="1" name="bookadmin">
+    <user id="290" parent="1" name="hr">
       <Host>localhost</Host>
     </user>
-    <table id="292" parent="288" name="book">
-      <Engine>InnoDB</Engine>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
-    </table>
-    <table id="293" parent="288" name="customer">
-      <Engine>InnoDB</Engine>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
-    </table>
-    <table id="294" parent="288" name="orders">
-      <Engine>InnoDB</Engine>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
-    </table>
-    <column id="295" parent="292" name="bookid">
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StoredType>int|0s</StoredType>
-    </column>
-    <column id="296" parent="292" name="bookname">
-      <Position>2</Position>
-      <StoredType>varchar(40)|0s</StoredType>
-    </column>
-    <column id="297" parent="292" name="publisher">
-      <Position>3</Position>
-      <StoredType>varchar(40)|0s</StoredType>
-    </column>
-    <column id="298" parent="292" name="price">
-      <Position>4</Position>
-      <StoredType>int|0s</StoredType>
-    </column>
-    <index id="299" parent="292" name="PRIMARY">
-      <ColNames>bookid</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <key id="300" parent="292" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="301" parent="293" name="custid">
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StoredType>int|0s</StoredType>
-    </column>
-    <column id="302" parent="293" name="name">
-      <Position>2</Position>
-      <StoredType>varchar(40)|0s</StoredType>
-    </column>
-    <column id="303" parent="293" name="address">
-      <Position>3</Position>
-      <StoredType>varchar(50)|0s</StoredType>
-    </column>
-    <column id="304" parent="293" name="phone">
-      <Position>4</Position>
-      <StoredType>varchar(20)|0s</StoredType>
-    </column>
-    <index id="305" parent="293" name="PRIMARY">
-      <ColNames>custid</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <key id="306" parent="293" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="307" parent="294" name="orderid">
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StoredType>int|0s</StoredType>
-    </column>
-    <column id="308" parent="294" name="custid">
-      <Position>2</Position>
-      <StoredType>int|0s</StoredType>
-    </column>
-    <column id="309" parent="294" name="bookid">
-      <Position>3</Position>
-      <StoredType>int|0s</StoredType>
-    </column>
-    <column id="310" parent="294" name="saleprice">
-      <Position>4</Position>
-      <StoredType>int|0s</StoredType>
-    </column>
-    <column id="311" parent="294" name="orderdate">
-      <Position>5</Position>
-      <StoredType>date|0s</StoredType>
-    </column>
-    <foreign-key id="312" parent="294" name="orders_ibfk_1">
-      <ColNames>custid</ColNames>
-      <RefColNames>custid</RefColNames>
-      <RefTableName>customer</RefTableName>
-    </foreign-key>
-    <foreign-key id="313" parent="294" name="orders_ibfk_2">
-      <ColNames>bookid</ColNames>
-      <RefColNames>bookid</RefColNames>
-      <RefTableName>book</RefTableName>
-    </foreign-key>
-    <index id="314" parent="294" name="PRIMARY">
-      <ColNames>orderid</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <index id="315" parent="294" name="custid">
-      <ColNames>custid</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="316" parent="294" name="bookid">
-      <ColNames>bookid</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="317" parent="294" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
   </database-model>
 </dataSource>
