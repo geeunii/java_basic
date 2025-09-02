@@ -1,7 +1,11 @@
 package Grade_Management;
 
+
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
 
 public class StudentInput {
 
@@ -22,12 +26,15 @@ public class StudentInput {
     }
 
     @SuppressWarnings("unchecked")  // 제네릭 타입 때문에 발생한 경고 처리
+    // -> 왜 사용했냐 ? readObject()는 반환 타입이 Object 이기 때문에 이를 HashMap 으로 형 변환할 때 경고가 발생 이 어노테이션이 그 경고를 없앰.
     private static void loadCheck() {
 
         if (file.exists()) {    // file 이 존재하는지 체크
+            // 파일에서 객체를 읽어 들이는데, 읽은 바이트 스트림을 자바 객체로 변환해 주는 역할
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+                // ois.readObject() 는 파일에 저장된 객체를 읽어서 반환. 형 변환되어 studentInfo 변수에 저장
                 studentInfo = (HashMap<String, Student>) ois.readObject();
-            } catch (IOException | ClassNotFoundException e) {
+            } catch (IOException | ClassNotFoundException e) { // 파일이 없거나 저장된 클래스를 찾을 수 없을 때
                 System.out.println("[오류] 파일이 존재하지 않습니다. 새로 생성합니다.");
                 studentInfo = new HashMap<>(); // 오류 발생 시 새로 생성
             }

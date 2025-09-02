@@ -1,7 +1,10 @@
 package Grade_Management;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.TreeSet;
 
 public class SortedStudent {
 
@@ -21,6 +24,7 @@ public class SortedStudent {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private static boolean loadObjectFromFile() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
             studentInfo = (HashMap<String, Student>) ois.readObject();
