@@ -53,3 +53,20 @@
 학생 정보를 정렬하여 **별도의 파일로 저장**하는 기능을 담당합니다.
 -   `createTreeSet()`: 평균과 이름으로 정렬하는 `Comparator`를 정의하고, 이를 사용해 `TreeSet`을 생성합니다. `HashMap`의 데이터를 `TreeSet`에 추가하면서 자동 정렬을 수행합니다.
 -   `outputObject()`: 정렬된 `TreeSet`을 `ArrayList`로 변환한 후, `orderByAvg.dat` 파일에 직렬화하여 저장합니다.
+
+---
+
+### 실행 결과
+
+학생 성적 데이터 정상 입력 및 저장
+![학생 성적 정상 입력 화면](Images/InPut.png)
+
+학생 성적 오류 입력 화면
+![학생 성적 오류 입력 화면](Images/InPutErr.png)
+
+저장된 데이터 불러와서 화면 출력
+![학생 성적 불러와서 출력](Images/OutPut.png)
+
+정렬된 데이터를 파일로 저장
+![학생 성적 정렬 파일 저장](Images/Sorted.png)
+
