@@ -15,13 +15,13 @@ public class StudentInput {
     private static final File file = new File("Temp/student.dat");
 
     public static void main(String[] args) {
-        // 1. 기존 파일이 있으면 불러오고, 없으면 새로 시작합니다.
+        // 기존 파일이 있으면 불러오고, 없으면 새로 시작
         loadCheck();
-        // 2. 사용자에게 프로그램 사용법을 안내합니다.
+        // 사용자에게 프로그램 사용법을 안내
         printUsage();
-        // 3. 사용자로부터 입력을 받습니다.
+        // 사용자로부터 입력을 받음
         checkKeyAndInputData();
-        // 4. 입력이 완료되면 파일에 저장합니다.
+        // 입력이 완료되면 파일에 저장
         saveData();
     }
 
